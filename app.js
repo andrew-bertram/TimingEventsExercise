@@ -39,14 +39,29 @@ stop.addEventListener(`click`, () => {
 // BONUS
 
 // 4
-let i = 120;
-const countdownTimer = setInterval(() => {
-    if (i > 0) {
-        const countdown = document.querySelector(`#countdown`);
-        const clock = document.createElement(`p`);
-        clock.innerText = i;
+const div3 = document.querySelector(`#countdown`);
+const p4 = document.createElement(`p`);
+p4.innerText = `2:00`;
+div3.append(p4);
+let startingSeconds = 120;
+
+const countdown = setInterval(() => {
+    startingSeconds--;
+    const minutes = Math.floor(startingSeconds / 60);
+    const seconds = startingSeconds % 60;
+    p4.innerText = `${minutes}:${seconds}`;
+
+    if (seconds < 10){
+        p4.innerText = `${minutes}:0${seconds}`;
     } else {
+        p4.innerText = `${minutes}:${seconds}`;
+    }
+
+    // Using a ternary
+    // (seconds < 10) ? `${minutes}:0${seconds}` : `${minutes}:${seconds}`;
+
+    if (startingSeconds === 0){
+        p4.innerText = `TIME IS UP`;
         clearInterval(countdown);
     }
-    i--;
 }, 1000);
